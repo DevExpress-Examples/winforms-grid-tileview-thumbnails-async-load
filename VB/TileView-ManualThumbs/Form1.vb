@@ -36,20 +36,26 @@ Namespace TileView_ManualThumbs
 
         Private Sub TileView1_GetThumbnailImage(ByVal sender As Object, ByVal e As DevExpress.Utils.ThumbnailImageEventArgs)
             Dim colorName As String = textures(e.DataSourceIndex).Name
-            'Generate a thumbnail for the current record.
-            Dim image As New Bitmap(e.DesiredThumbnailSize.Width, e.DesiredThumbnailSize.Height)
-            Dim graphics As Graphics = System.Drawing.Graphics.FromImage(image)
-            Dim tileColor As Color = Color.FromName(colorName)
-            Dim grUnit As GraphicsUnit = GraphicsUnit.Pixel
-            Dim imageRect As RectangleF = image.GetBounds(grUnit)
-            Dim brush As New LinearGradientBrush(imageRect, Color.White, Color.White, 45, False)
-            Dim cblend As New ColorBlend(4)
-            cblend.Colors = New Color(3) { Color.White, tileColor, tileColor, Color.White}
-            cblend.Positions = New Single(3) { 0F, 0.5F, 0.7F, 1F }
-            brush.InterpolationColors = cblend
-            graphics.FillRectangle(brush, imageRect)
-            e.ThumbnailImage = image
+            e.ThumbnailImage = GetImage(e.DesiredThumbnailSize, colorName)
         End Sub
+
+        Private Function GetImage(ByVal imageSize As Size, ByVal colorName As String) As Image
+            'Generate a thumbnail
+            Dim image As New Bitmap(imageSize.Width, imageSize.Height)
+            Using graphics As Graphics = System.Drawing.Graphics.FromImage(image)
+                Dim tileColor As Color = Color.FromName(colorName)
+                Dim grUnit As GraphicsUnit = GraphicsUnit.Pixel
+                Dim imageRect As RectangleF = image.GetBounds(grUnit)
+                Using brush As New LinearGradientBrush(imageRect, Color.White, Color.White, 45, False)
+                    Dim cblend As New ColorBlend(4)
+                    cblend.Colors = New Color(3) { Color.White, tileColor, tileColor, Color.White }
+                    cblend.Positions = New Single(3) { 0F, 0.5F, 0.7F, 1F }
+                    brush.InterpolationColors = cblend
+                    graphics.FillRectangle(brush, imageRect)
+                End Using
+            End Using
+            Return image
+        End Function
 
         Private Sub InitData()
             textures = New List(Of Texture)()
