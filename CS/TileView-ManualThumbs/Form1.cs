@@ -34,19 +34,25 @@ namespace TileView_ManualThumbs {
 
         private void TileView1_GetThumbnailImage(object sender, DevExpress.Utils.ThumbnailImageEventArgs e) {
             string colorName = textures[e.DataSourceIndex].Name;
-            //Generate a thumbnail for the current record.
-            Bitmap image = new Bitmap(e.DesiredThumbnailSize.Width, e.DesiredThumbnailSize.Height);
-            Graphics graphics = Graphics.FromImage(image);
-            Color tileColor = Color.FromName(colorName);
-            GraphicsUnit grUnit = GraphicsUnit.Pixel;
-            RectangleF imageRect = image.GetBounds(ref grUnit);
-            LinearGradientBrush brush =   new LinearGradientBrush(imageRect, Color.White, Color.White, 45, false);
-            ColorBlend cblend = new ColorBlend(4);
-            cblend.Colors = new Color[4] { Color.White, tileColor, tileColor, Color.White};
-            cblend.Positions = new float[4] { 0f, 0.5f, 0.7f, 1f };
-            brush.InterpolationColors = cblend;
-            graphics.FillRectangle(brush, imageRect);
-            e.ThumbnailImage = image;
+            e.ThumbnailImage = GetImage(e.DesiredThumbnailSize, colorName);
+        }
+
+        private Image GetImage(Size imageSize, string colorName) {
+            //Generate a thumbnail
+            Bitmap image = new Bitmap(imageSize.Width, imageSize.Height);
+            using(Graphics graphics = Graphics.FromImage(image)) {
+                Color tileColor = Color.FromName(colorName);
+                GraphicsUnit grUnit = GraphicsUnit.Pixel;
+                RectangleF imageRect = image.GetBounds(ref grUnit);
+                using(LinearGradientBrush brush = new LinearGradientBrush(imageRect, Color.White, Color.White, 45, false)) {
+                    ColorBlend cblend = new ColorBlend(4);
+                    cblend.Colors = new Color[4] { Color.White, tileColor, tileColor, Color.White };
+                    cblend.Positions = new float[4] { 0f, 0.5f, 0.7f, 1f };
+                    brush.InterpolationColors = cblend;
+                    graphics.FillRectangle(brush, imageRect);
+                }
+            }
+            return image;
         }
 
         private void InitData() {
