@@ -1,5 +1,7 @@
-﻿Namespace TileView_ManualThumbs
-    Partial Public Class Form1
+Namespace TileView_ManualThumbs
+
+    Partial Class Form1
+
         ''' <summary>
         ''' Required designer variable.
         ''' </summary>
@@ -10,30 +12,30 @@
         ''' </summary>
         ''' <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            If disposing AndAlso (components IsNot Nothing) Then
-                components.Dispose()
+            If disposing AndAlso (Me.components IsNot Nothing) Then
+                Me.components.Dispose()
             End If
+
             MyBase.Dispose(disposing)
         End Sub
 
-        #Region "Windows Form Designer generated code"
-
+#Region "Windows Form Designer generated code"
         ''' <summary>
         ''' Required method for Designer support - do not modify
         ''' the contents of this method with the code editor.
         ''' </summary>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim tableColumnDefinition1 As New DevExpress.XtraEditors.TableLayout.TableColumnDefinition()
-            Dim tableRowDefinition1 As New DevExpress.XtraEditors.TableLayout.TableRowDefinition()
-            Dim tileViewItemElement1 As New DevExpress.XtraGrid.Views.Tile.TileViewItemElement()
+            Dim tableColumnDefinition1 As DevExpress.XtraEditors.TableLayout.TableColumnDefinition = New DevExpress.XtraEditors.TableLayout.TableColumnDefinition()
+            Dim tableRowDefinition1 As DevExpress.XtraEditors.TableLayout.TableRowDefinition = New DevExpress.XtraEditors.TableLayout.TableRowDefinition()
+            Dim tileViewItemElement1 As DevExpress.XtraGrid.Views.Tile.TileViewItemElement = New DevExpress.XtraGrid.Views.Tile.TileViewItemElement()
             Me.colName = New DevExpress.XtraGrid.Columns.TileViewColumn()
             Me.gridControl1 = New DevExpress.XtraGrid.GridControl()
             Me.textureBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             Me.tileView1 = New DevExpress.XtraGrid.Views.Tile.TileView()
-            CType(Me.gridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.textureBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.tileView1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType((Me.gridControl1), System.ComponentModel.ISupportInitialize).BeginInit()
+            CType((Me.textureBindingSource), System.ComponentModel.ISupportInitialize).BeginInit()
+            CType((Me.tileView1), System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             ' 
             ' colName
@@ -52,7 +54,7 @@
             Me.gridControl1.Name = "gridControl1"
             Me.gridControl1.Size = New System.Drawing.Size(445, 291)
             Me.gridControl1.TabIndex = 0
-            Me.gridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() { Me.tileView1})
+            Me.gridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.tileView1})
             ' 
             ' textureBindingSource
             ' 
@@ -62,7 +64,7 @@
             ' 
             Me.tileView1.Appearance.ItemNormal.Font = New System.Drawing.Font("Segoe UI", 7F)
             Me.tileView1.Appearance.ItemNormal.Options.UseFont = True
-            Me.tileView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() { Me.colName})
+            Me.tileView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colName})
             Me.tileView1.GridControl = Me.gridControl1
             Me.tileView1.Name = "tileView1"
             Me.tileView1.OptionsTiles.ColumnCount = -1
@@ -85,19 +87,20 @@
             Me.Controls.Add(Me.gridControl1)
             Me.Name = "Form1"
             Me.Text = "Form1"
-            CType(Me.gridControl1, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.textureBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.tileView1, System.ComponentModel.ISupportInitialize).EndInit()
+            AddHandler Me.Load, New System.EventHandler(AddressOf Me.Form1_Load)
+            CType((Me.gridControl1), System.ComponentModel.ISupportInitialize).EndInit()
+            CType((Me.textureBindingSource), System.ComponentModel.ISupportInitialize).EndInit()
+            CType((Me.tileView1), System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
-
         End Sub
 
-        #End Region
-
+#End Region
         Private gridControl1 As DevExpress.XtraGrid.GridControl
+
         Private tileView1 As DevExpress.XtraGrid.Views.Tile.TileView
+
         Private textureBindingSource As System.Windows.Forms.BindingSource
+
         Private colName As DevExpress.XtraGrid.Columns.TileViewColumn
     End Class
 End Namespace
-
